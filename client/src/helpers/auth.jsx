@@ -15,7 +15,7 @@ export const ProvideAuth = ({ children }) => {
 	const token = Cookies.get('caselist_token');
 	const trusted = Cookies.get('caselist_trusted');
 	const admin = Cookies.get('caselist_admin');
-	const userId = Cookies.get('caselist_user_id');
+	const userId = parseInt(Cookies.get('caselist_user_id')) || null;
 	if (token && !user?.loggedIn) {
 		setUser({ loggedIn: true, token, trusted, admin, userId });
 	}
@@ -28,7 +28,7 @@ export const ProvideAuth = ({ children }) => {
 				token: response.token,
 				trusted: response.trusted,
 				admin: response.admin,
-				userId: response.userId,
+				userId: parseInt(response.userId) || null,
 			});
 			return true;
 		} catch (err) {
