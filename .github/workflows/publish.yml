@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 env:
     CI: true
@@ -30,7 +27,7 @@ jobs:
         username: ${{ secrets.REGISTRY_USER }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
         registry: registry.speechanddebate.org
-        tags: "${{ env.COMMIT_VERSION }}"
+        tags: "${{ env.COMMIT_VERSION }},production"
         context: client
     
     - name: Publish server image to Registry
@@ -40,7 +37,7 @@ jobs:
         username: ${{ secrets.REGISTRY_USER }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
         registry: registry.speechanddebate.org
-        tags: "${{ env.COMMIT_VERSION }}"
+        tags: "${{ env.COMMIT_VERSION }},production"
         context: server
     
     - name: If image was published change icon
